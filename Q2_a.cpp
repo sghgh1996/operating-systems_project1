@@ -77,12 +77,12 @@ void do_sort(int array[], int size, int low, int high){
 		do_sort(array, size, low, mid); // left child
 		exit(0);
 	} else { // parent
-		waitpid(pid1, NULL, 0);
 		pid2 = fork();
 		if(pid2 == 0) {// child
 			do_sort(array, size, mid+1, high); // right child
 			exit(0);
 		} else { // parent
+			waitpid(pid1, NULL, 0);
 			waitpid(pid2, NULL, 0);
 			recursive_merging(array, size, low, mid, high); // merging right and left
 		}
